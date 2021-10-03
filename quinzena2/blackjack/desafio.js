@@ -6,7 +6,13 @@ let arrayCartasPC = []
 let resposta = confirm(`Deseja iniciar uma nova partida?`)
 
 if (resposta == true) {
+
    while (resposta == true) {
+      somaValores = 0
+      cartasUsuario = 0
+      cartasPC = 0;
+      arrayCartasUsu = []
+      arrayCartasPC = []
 
       //sorteia as cartas do usuario
       function sorteiaCartaUsu() {
@@ -58,15 +64,14 @@ if (resposta == true) {
          sorteiaCartaPC()
          console.log(``)
       }
+      verificaGanhador()
+      console.log(`Fim da partida.`);
+      resposta = confirm(`Deseja iniciar uma nova partida?`)
    }
-   verificaGanhador()
-   console.log(`Fim da partida.`);
-} else {
-   console.log(`A soma dos valores das cartas é: ${somaValores}`);
-   verificaGanhador()
-   console.log(`Fim da partida.`);
-}
-//chaca as cartas do usuario
+   resposta = confirm(`Deseja iniciar uma nova partida?`)
+} 
+
+//checa as cartas do usuario
 function checaAses() {
    if (arrayCartasUsu[0].valor == 11 && arrayCartasUsu[1].valor == 11) {
       console.log(`Cartas não permitidas. Realizando novo sorteio`);

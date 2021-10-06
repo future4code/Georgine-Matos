@@ -34,7 +34,7 @@ function retornaNumerosPares(array) {
 function retornaMaiorNumero(array) {
   let maior = 0
   for (const elemento of array) {
-    if (elemento>maior) {
+    if (elemento > maior) {
       maior = elemento
     }
   }
@@ -53,24 +53,54 @@ function retornaExpressoesBooleanas() {
 
 // EXERCÍCIO 07
 function retornaNNumerosPares(n) {
-
+  let pares = []
+  for (let i = 0; i <= n * 2; i++) {
+    if (pares.length < n) {
+      if (i % 2 == 0) {
+        pares.push(i)
+      }
+    }
+  }
+  return pares
 }
+
 
 // EXERCÍCIO 08
 function checaTriangulo(a, b, c) {
-  // return 'Escaleno'
-  // return 'Equilátero'
-  // return 'Isósceles'
+  if (a == b && b == c) {
+    return 'Equilátero'
+  } else if (a != b && b != c && c != a) {
+    return 'Escaleno'
+  } else {
+    return 'Isósceles'
+  }
 }
 
 // EXERCÍCIO 09
 function comparaDoisNumeros(num1, num2) {
-  // Formato do objeto a ser retornado:
-  // {
-  //   maiorNumero: X,
-  //   maiorDivisivelPorMenor: Y,
-  //   diferenca: Z
-  // }
+  const elemento = {
+    maiorNumero: 0,
+    maiorDivisivelPorMenor:'',
+    diferenca: 0
+  }
+  if (num1 > num2) {
+    elemento.maiorNumero = num1
+    elemento.diferenca = num1 - num2
+    if (num1 % num2 == 0) {
+      elemento.maiorDivisivelPorMenor = true
+    }else{
+      elemento.maiorDivisivelPorMenor = false
+    }
+  } else {
+    elemento.maiorNumero = num2
+    elemento.diferenca = num2 - num1
+    if (num2 % num1 == 0) {
+      elemento.maiorDivisivelPorMenor = true
+    }else{
+      elemento.maiorDivisivelPorMenor = false
+    }
+  }
+  return elemento
 }
 
 // EXERCÍCIO 10

@@ -1,0 +1,9 @@
+1- ATENÇÃO NO ENUNCIADO
+2- LEVANTAMENTO DE INFORMAÇÕES RELEVANTES
+3- PENSAR NAS ENTRADAS E SAÍDAS
+4- FLUXOGRAMA
+5- CODIFICAR
+6- INSERÇÃO DE DADOS VERIFICANDO O COMPORTAMENTO DA LÓGICA
+7- MELHORIA DO CÓDIGO
+
+A sequência tende a facilitar o percurso desde a compreensão à entrega de uma possível solução. Imaginar etapas a serem superadas no decorrer do caminho transparece um modo organizado e efetivo quando se trabalha com variáveis.

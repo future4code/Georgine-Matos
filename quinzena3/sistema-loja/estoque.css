@@ -1,0 +1,118 @@
+:root {
+    --corpo: "Comfortaa";
+    --titulo: "Scheherazade New";
+    --cor-branco: #F2F2F2;
+    --cor-cinza-claro: #727273;
+    --cor-cinza-escuro: #3D3E40;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: var(--corpo);
+}
+
+body {
+    color: var(--cor-branco);
+    background-image: url(img/tomasz-sroka-CewT9iFBcgE-unsplash.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.cabecalho {
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #F2F2F2;
+}
+
+.cabecalho>h1,
+p {
+    padding: 5px;
+}
+
+.menu {
+    width: 100%;
+    height: 85px;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu>.nav {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menu>.nav>a {
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #727273;
+    color: #F2F2F2;
+}
+
+.menu>.nav>input {
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--cor-cinza-escuro);
+}
+
+.menu>.nav>a:hover {
+    font-weight: bolder;
+    background-color: var(--cor-branco);
+    color: var(--cor-cinza-escuro);
+    transition: all .5s;
+    border: 1px solid var(--cor-cinza-escuro);
+}
+
+.menu .nav .user {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.menu .nav .user a {
+    margin-right: 15px;
+}
+
+.menu .nav .user img {
+    width: 35px;
+}
+
+.listaProdutos{
+    margin-top: 20px;
+}
+
+.listaProdutos table {
+    width: 83%;
+    color: var(--cor-branco);
+    margin: 0 auto;
+    border: 1px solid var(--cor-branco);
+    border-collapse: collapse;
+}
+
+.listaProdutos table th{
+    text-align: center;
+}
+
+.listaProdutos table td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.listaProdutos table tr td img{
+    width: 200px;
+    height: 200px;
+}
+

@@ -70,7 +70,7 @@ div img {
   *
   **/
 
-ol li{
+ol li{ 
     list-style-position: inside;
 }
 

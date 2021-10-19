@@ -8,7 +8,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto';
+    font-family: 'Roboto'; 
 }
 
 h2 {
@@ -34,6 +34,7 @@ img {
 
 div>p:first-child {
     display: block;
+    margin: auto;
 }
 
 div img {
@@ -69,6 +70,10 @@ div img {
   *
   **/
 
+ol li{
+    list-style-position: inside;
+}
+
 #container-de-descricao {
     padding: 20px;
     background-color: #2274a5;
@@ -101,6 +106,9 @@ div img {
   *  ESTILOS COMPRAR 
   *
   **/
+.icone{
+    cursor: pointer;
+}
 
 div:nth-child(2),
 div:last-child {
@@ -136,6 +144,7 @@ td button:hover{
 
 
 #back-button {
+    margin: auto;
     background-color: white;
     width: 100px;
     height: 20px;
@@ -147,4 +156,9 @@ td button:hover{
 
 #back-button:hover {
     background-color: #635a3d
+}
+
+.voltar{
+    margin-top: 30px;
+    display: flex;
 }

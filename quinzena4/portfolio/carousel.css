@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&family=Spartan:wght@600&display=swap');
+
+:root {
+    --corpo: "Raleway", sans-serif;
+    --titulo: "Spartan", sans-serif;
+    --laranjaClaro: #F8955C;
+    --laranjaEscuro: #D95A11;
+    --azulClaro: #0396A6;
+    --azulEscuro: #036873;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.mySlides {
+    display: none;
+    border-radius: 13px;
+    box-shadow: 5px 5px 20px rgba(248, 149, 92);
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: var(--laranjaClaro);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: var(--laranjaEscuro);
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.banner .slideshow-container .mySlides .tec{
+    border-radius: 13px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    height: 100%;
+    background: linear-gradient(rgba(248, 149, 92, 80%), rgba(217, 90, 17, 90%))
+        
+}
+
+.banner .slideshow-container .mySlides .tec h3{
+    margin-bottom: 5px;
+}
+
+.banner .slideshow-container .mySlides{
+    margin: 0 auto;
+    width: 83%;
+    height: 240px;
+}
+
+.banner .slideshow-container .mySlides .html{
+    border-radius: 13px;
+    background: url(img/html.jpg);
+    background-size: cover;
+    height: 240px;
+}
+
+.banner .slideshow-container .mySlides .css{
+    border-radius: 13px;
+    background: url(img/css.jpg);
+    background-size: cover;
+    height: 240px;
+}
+
+.banner .slideshow-container .mySlides .bootstrap{
+    border-radius: 13px;
+    background: url(img/bootstrap.jpg);
+    background-size: cover;
+    height: 240px;
+}
+
+.banner .slideshow-container .mySlides .github{
+    border-radius: 13px;
+    background: url(img/git.jpg);
+    background-size: cover;
+    height: 240px;
+}
+
+.banner .slideshow-container .mySlides .js{
+    border-radius: 13px;
+    background: url(img/js.jpg);
+    background-size: cover;
+    height: 240px;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
+}

@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&family=Spartan:wght@600&display=swap');
+
+:root {
+    --corpo: "Raleway", sans-serif;
+    --titulo: "Spartan", sans-serif;
+    --laranjaClaro: #F8955C;
+    --laranjaEscuro: #D95A11;
+    --azulClaro: #0396A6;
+    --azulEscuro: #036873;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--titulo);
+    letter-spacing: 1.5px;
+}
+
+header {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+}
+
+header .nav {
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .nav a img {
+    width: 200px;
+}
+
+header .nav a {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+header .nav a:hover {
+    color: var(--laranjaClaro);
+    transition: all 0.5s;
+}
+
+/* -----------    APRESENTAÇÃO    ----------- */
+
+body {
+    background-image: url(img/backPort.png);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 0 -70px;
+}
+
+main .parte1 {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+main .parte1 .desc {
+    margin: auto;
+    width: 85%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex-direction: column;
+    line-height: 2em;
+    font-size: 1.6em;
+}
+
+main .parte1 button {
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: var(--laranjaClaro);
+    letter-spacing: 1px;
+}
+
+main .parte1 button:hover {
+    transition: all 0.5s;
+    background-color: var(--laranjaEscuro);
+}
+
+main .parte1 .desc h2 {
+    font-family: var(--corpo);
+    letter-spacing: 2px;
+}
+
+main .parte1 .desc h2 span {
+    color: var(--laranjaClaro);
+    font-weight: bolder;
+}
+
+/* -----------    FORMAÇÃO    ----------- */
+main .formacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9)
+}
+
+main .formacao h2 {
+    color: var(--azulEscuro);
+    margin-top: 5%;
+    margin-bottom: -40px;
+}
+
+main .formacao .grupo {
+    width: 85%;
+    margin: 5% 0;
+}
+
+
+/* -----------    PROJETOS    ----------- */
+main .projetos {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background:
+        linear-gradient(rgba(248, 149, 92, 55%), rgba(217, 90, 17, 55%)),
+        url(img/businessman-pointing-his-presentation-futuristic-digital-screen.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+main .projetos h2 {
+    color: #036873;
+    padding-top: 5%;
+}
+
+main .projetos .listaProjetos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+main .projetos .listaProjetos .responsivo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .sidebar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .colorflipper {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-position: -100px;
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .simpleCounter {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-position: -99px -88px;
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .descubraNumero {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-position: -99px -88px;
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .workList {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(3, 150, 166, 55%)), url(img/coding.jpg);
+    background-position: -99px -88px;
+    background-size: cover;
+    background-position: -20px;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto {
+    max-width: 20%;
+    height: 300px;
+    border-radius: 15px;
+    margin: 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 8px 8px 8px #636363;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto .fim {
+    background: white;
+    opacity: .8;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto h3 {
+    margin-top: 60px;
+    background-color: white;
+    width: 100%;
+    padding: 5px;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto p {
+    margin-bottom: 5px;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto a {
+    color: var(--azulClaro);
+    font-weight: bolder;
+    text-decoration: none;
+    font-size: 0.85em;
+}
+
+main .projetos .listaProjetos .identificacaoProjeto a:hover {
+    color: var(--laranjaEscuro);
+    transition: all .5s;
+}
+
+/* -----------    HABILIDADES    ----------- */
+main .habilidades {
+    padding: 5% 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), 
+    url(img/target-achievement-goals-strategy-concept.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+main .habilidades h2{
+    color: var(--azulEscuro);
+    font-weight: bolder;
+}
+
+main .habilidades .tudo {
+    width: 85%;
+    margin: 5% auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+main .habilidades .tudo .skills {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .habilidades .tudo .skills .coluna {
+    width: 50%;
+    padding: 50px;
+    text-align: left;
+}
+
+main .habilidades .tudo .banner {
+    margin-top: 2%;
+    width: 100%;
+}
+
+main .habilidades .tudo .banner h1 {
+    padding: 50px;
+}
+
+/* -----------    CONTATO    ----------- */
+main .contato {
+    color: var(--azulEscuro);
+    font-weight: bolder;
+    padding: 5% 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgba(255, 255, 255), rgba(3, 150, 166, 55%)), url(img/hands-with-laptop-virtual-world-map.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+main .contato .colunas {
+    width: 85%;
+    margin: 5% auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 55%))
+}
+
+main .contato .colunas .coluna1{
+    width: 50%;
+    padding: 5% 0 5% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+}
+
+main .contato .colunas .coluna1 .grupo {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+main .contato .colunas .coluna1 .grupo input,
+textarea {
+    padding: 5px;
+    width: 100%;
+}
+
+main .contato .colunas .coluna1 .grupo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+main .contato .colunas .coluna1 button {
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: var(--laranjaClaro);
+    letter-spacing: 1px;
+}
+
+main .contato .colunas .coluna1 button:hover {
+    background: var(--laranjaEscuro);
+    transition: all 0.5s;
+}
+
+main .contato .colunas .coluna2 {
+    height: 360px;
+    width: 50%;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+}
+
+main .contato .colunas .coluna2 .localizacao {
+    margin-bottom: 20px;
+}
+
+main .contato .colunas .coluna2 .localizacao h3{
+    margin-bottom: 20px;
+}
+
+main .contato .colunas .coluna2 .localizacao .end{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+main .contato .colunas .coluna2 .localizacao .end i{
+    margin-right: 10px;
+    width: 15px;
+}
+
+main .contato .colunas .coluna2 .localizacao .tel{
+    display: flex;
+}
+
+main .contato .colunas .coluna2 .localizacao .tel i{
+    margin-right: 10px;
+    width: 15px;
+    transform: rotate(110deg);
+}
+
+main .contato .colunas .coluna2 .redesSociais {
+    width: 100%;
+}
+
+main .contato .colunas .coluna2 .redesSociais .redes {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .contato .colunas .coluna2 .redesSociais .redes i {
+    font-size: 25px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+main .contato .colunas .coluna2 .redesSociais .redes i:hover {
+    transition: all .5s;
+    color: var(--laranjaEscuro);
+}
+
+
+/* -----------    FOOTER    ----------- */
+footer {
+    color: var(--azulEscuro);
+    width: 100%;
+    height: 10vh;
+    background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 55%))
+}
+
+footer .fim {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+footer .fim strong{
+    color: var(--laranjaEscuro);
+}

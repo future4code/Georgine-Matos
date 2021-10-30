@@ -1,0 +1,112 @@
+:root{
+    --rosaEscuro: mediumvioletred;
+    --rosaClaro: #f2d0e0;
+    --sombra: darkgray;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body{
+    display: flex;
+    flex-direction: column;
+} */
+
+header img, main aside .menu img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+header{
+    padding: 5px 2%;
+    width: 100%;
+    height: 6vh;
+    background: var(--rosaEscuro);
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav .logo{
+    display: flex;
+}
+
+main{
+    width: 100%;
+    height: 88vh;
+    display: flex;
+}
+
+main aside{
+    width: 30%;
+    height: 100%;
+    background: var(--rosaClaro);
+}
+
+main aside .menu{
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main aside .menu .elemento{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+main aside .menu .elemento .p1{
+    display: flex;
+}
+
+main .listaBolos{
+    width: 70%;
+    height: 100%;
+    padding: 10px 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 28px;
+}
+
+main .listaBolos .bolo{
+    width: 198px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(113, 119, 28);
+}
+
+main .listaBolos .bolo .imgBolo{
+    height: 200px;
+    background: url(img/bolo.jpg);
+    background-size: cover;
+}
+
+main .listaBolos .bolo .desc{
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+footer{
+    width: 100%;
+    height: 6vh;
+    background-color: var(--rosaEscuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,312 @@
+:root {
+    --corpo: "Comfortaa";
+    --titulo: "Scheherazade New";
+    --cor-branco: #F2F2F2;
+    --cor-cinza-claro: #727273;
+    --cor-cinza-escuro: #3D3E40;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: var(--corpo);
+}
+
+body{
+    background-image: url(img/tomasz-sroka-CewT9iFBcgE-unsplash.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.cabecalho{ 
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #F2F2F2;
+}
+
+.cabecalho > h1, p{
+    padding: 5px;
+}
+
+.menu{
+    width: 100%;
+    height: 85px;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu > .nav{
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menu > .nav > a{
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #727273;
+    color: #F2F2F2;
+}
+
+.menu > .nav > input{
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--cor-cinza-escuro);
+}
+
+.menu > .nav > a:hover{
+    font-weight: bolder;
+    background-color: var(--cor-branco);
+    color: var(--cor-cinza-escuro);
+    transition: all .5s;
+    border: 1px solid var(--cor-cinza-escuro);
+}
+
+.menu .nav .user{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.menu .nav .user a{
+    margin-right: 15px;
+}
+
+.menu .nav .user img{
+    width: 35px;
+}
+
+.banner{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    background-color: white;
+}
+
+.banner .banner1{
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner .banner1 img{
+    width: 600px;
+}
+
+.banner .banner1 .desc{
+    display: flex;
+    padding-right: 35px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.banner .banner1 .desc img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.banner .banner1 .desc .botoes{
+    margin-top: 6px;
+    width: 65%;
+    display: flex;
+    justify-content: space-around;   
+}
+
+.banner .banner1 .desc h2{
+    font-size: 20px;
+}
+
+.banner .banner1 .desc .botoes input{
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #727273;
+    color: #F2F2F2;
+}
+
+.banner .banner1 .desc .botoes input:hover{
+    border: 1px solid var(--cor-cinza-escuro);
+    font-weight: bolder;
+    background-color: var(--cor-branco);
+    color: var(--cor-cinza-escuro);
+    transition: all .5s;
+}
+
+.parceiros{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.parceiros h2{
+    color: var(--cor-cinza-claro);
+    margin-bottom: 15px;
+}
+
+.parceiros .parceiros1{
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.parceiros .parceiros1 img{
+    width: 200px;    
+}
+
+.categorias{
+    color: var(--cor-cinza-claro);
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.categorias h2{
+    margin-bottom: 15px;
+}
+
+.categorias .categorias1{
+    margin: 0 auto;
+    width: 80%;
+    color: var(--cor-branco);
+    display: flex;
+    justify-content: space-between;
+}
+
+.categorias .acessorios, .cameras, .armazenamento{
+    cursor: pointer;
+    border-radius: 15px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 5px 10px 8px var(--cor-cinza-claro);
+}
+
+.categorias .categorias1 .acessorios{
+    background: url(img/acessorios.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.categorias .categorias1 .acessorios p{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.categorias .categorias1 .cameras{
+    background: url(img/cameras.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.categorias .categorias1 .cameras p{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.categorias .categorias1 .armazenamento{
+    background: url(img/cartoes.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.categorias .categorias1 .armazenamento p{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+footer{
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 20px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: var(--cor-branco);
+}
+
+footer .container{
+    margin: auto;
+    width: 82%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .container .menu{
+    width: 33%;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+footer .container p{
+    font-weight: bolder;
+}
+
+footer .container .menu a, .email{
+    color: var(--cor-cinza-escuro);
+    text-decoration: none;
+    margin: 5px;
+    padding: 2px;
+}
+
+footer .container .menu, .email{
+    padding: 5px;
+}
+
+footer .container .pagamentos{
+    width: 33%;
+    height: 100px;
+    background: url(img/formas_de_pagto.png) no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+footer .container .pagamentos p{
+    margin-bottom: 10px;
+}
+
+footer .container .redesSociais{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 33%;
+}
+
+footer .container .redesSociais img{
+    width: 40px;
+}
+
+footer .container .redesSociais .icones{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}

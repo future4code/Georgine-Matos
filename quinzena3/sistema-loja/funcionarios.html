@@ -5,55 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="funcionarios.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+        /*Comfortaa */
+        @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+        /*Scheherazade New*/
+    </style>
     <title>Funcionários</title>
 </head>
 
 <body>
-    <div>
-        <h2>Bem-vind@ ao <em>Bazar<i>.net</i></em>!</h2>
+    <div class="cabecalho">
+        <h1>Bem-vind@ ao <em>Bazar<i>.net</i></em>!</h1>
+        <p>Uma seleção de produtos especiais</p>
     </div>
 
-    <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+    <div class="menu">
+        <div class="nav">
+            <a href="index.html">Página Inicial</a>
+            <a href="ctrl-estoque.html">Controle de Estoque</a>
+            <a href="add-produto.html">Adicionar Produto</a>
+            <a href="funcionarios.html">Funcionários</a>
+            <a href="pagina-venda.html">Página de venda</a>
+            <a href="pagina-historico.html">Histórico de venda</a>
+            <div class="user">
+                <a href="#"><img src="img/user.svg" alt="" srcset=""></a>
+                <a href="#"><img src="img/bag.svg" alt="" srcset=""></a>
+            </div>
+        </div>
     </div>
 
-    <h2>Funcionários</h2>
-    <table>
-        <tr>
-            <td>funcionário 1</td>
-        </tr>
-        <tr>
-            <td>funcionário 2</td>
-        </tr>
-        <tr>
-            <td>funcionário 3</td>
-        </tr>
-        <tr>
-            <td>funcionário 4</td>
-        </tr>
-        <tr>
-            <td>funcionário 5</td>
-        </tr>
-        <tr>
-            <td>funcionário 6</td>
-        </tr>
-        <tr>
-            <td>funcionário 7</td>
-        </tr>
-        <tr>
-            <td>funcionário 8</td>
-        </tr>
-        <tr>
-            <td>funcionário 9</td>
-        </tr>
-        <tr>
-            <td>funcionário 10</td>
-        </tr>
-    </table>
+    <div class="listaFuncionarios">
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Função</th>
+                <th>Admissão</th>
+            </tr>
+            <tr>
+                <td>Funcionário 1</td>
+                <td>Vendedor</td>
+                <td>14/02/2000</td>
+            </tr>
+            <tr>
+                <td>Funcionario 2</td>
+                <td>Gerente</td>
+                <td>01/10/2000</td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 
-</html>
+</html> 

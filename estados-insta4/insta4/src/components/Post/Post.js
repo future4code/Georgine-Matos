@@ -40,6 +40,12 @@ const PostPhoto = styled.img`
   width: 100%;
 `;
 
+const Interacao = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  color: coral;
+`;
+
 class Post extends React.Component {
   state = {
     curtido: false,

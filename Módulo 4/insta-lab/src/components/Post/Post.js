@@ -25,8 +25,9 @@ const Post = (props) => {
   const onClickCurtida = () => {
     if (curtido) {
       setCurtido(!curtido);
+      setNumeroCurtidas(numeroCurtidas - 1);
     } else {
-      setCurtido(curtido);
+      setCurtido(!curtido);
       setNumeroCurtidas(numeroCurtidas + 1);
     }
   };
@@ -47,9 +48,9 @@ const Post = (props) => {
   const caixaDeComentario = comentando ? (
     <SecaoComentario enviarComentario={enviarComentario}/>
   ):(
-    comentarios.map(comentario=>{
+    comentarios.map((comentario, index)=>{
       return(
-        <CommentContainer>
+        <CommentContainer key={index}>
           <p>{comentario}</p>
         </CommentContainer>
       )

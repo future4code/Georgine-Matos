@@ -1,44 +1,24 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import "./App.css";
-import ImgUser, {
-  ContainerPai,
-  ContainerHeader,
-  Astro,
-  Match,
-  AstroMatch,
-  Hr,
-  ContainerFooter,
-} from "./components/style";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import Fotos from "./components/Fotos";
-import CheckIcon from '@mui/icons-material/Check';
-import BotaoSim from "./components/styleBotaoSim";
-import BotaoNao from "./components/styleBotaoNao";
-import ClearIcon from '@mui/icons-material/Clear';
-import Matchs from "./components/Matchs";
-
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  const [tela, setTela] = useState()
-  
   return (
-    <ContainerPai>
-      <ContainerHeader>
-        <AstroMatch>
-          <Astro>astro</Astro>
-          <Match>match</Match>
-        </AstroMatch>
-        <ImgUser icoHeader={GroupAddIcon} alt="Ver Matchs"/>
-      </ContainerHeader>
-      <Hr/>
-      <Fotos/>
-      {/* <Matchs/> */}
-      <ContainerFooter>
-        <BotaoNao ico={ClearIcon}/>
-        <BotaoSim ico={CheckIcon}/>
-      </ContainerFooter>
-    </ContainerPai>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 

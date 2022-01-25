@@ -4,7 +4,8 @@
 }
 
 body {
-  background: #daf6ff;
+  background: url(../WIREFRAME/nasa.jpg) no-repeat;
+  background-size: cover;
   margin: 0;
   font-family: 'Barlow', sans-serif;
   -webkit-font-smoothing: antialiased;

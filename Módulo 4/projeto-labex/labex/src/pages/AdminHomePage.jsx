@@ -16,7 +16,7 @@ const ContainerPai = styled.div`
   border-radius: 10px;
   background: white;
   box-shadow: 5px 10px 18px #888888;
-  margin: 5% auto;
+  margin: 3% auto;
   padding: 20px;
 `;
 
@@ -41,7 +41,7 @@ const Botoes = styled.button`
   color: white;
   box-shadow: 6px 7px 10px #888888;
   transition: all 0.4s ease-out;
-  margin: 20px 0;
+  margin-bottom: 40px;
   :hover {
     background: #006585;
     transition: all 0.4s ease-out;
@@ -59,7 +59,7 @@ const BotaoSair = styled.button`
   color: white;
   box-shadow: 6px 7px 10px #888888;
   transition: all 0.4s ease-out;
-  margin: 20px 0;
+  margin-bottom: 40px;
   :hover {
     background: #a01c28;
     transition: all 0.4s ease-out;
@@ -68,10 +68,11 @@ const BotaoSair = styled.button`
 
 const BotaoDeletar = styled.button`
   cursor: pointer;
+  font-size: 20px;
   border: none;
   height: 40px;
   width: 90px;
-  padding: 5px;
+  padding: 5px 8px;
   border-radius: 10px;
   background: #dc3545;
   color: white;

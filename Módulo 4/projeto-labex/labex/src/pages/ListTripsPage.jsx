@@ -16,7 +16,7 @@ const ContainerPai = styled.div`
   border-radius: 10px;
   background: white;
   box-shadow: 5px 10px 18px #888888;
-  margin: 10% auto;
+  margin: 3% auto;
   padding: 20px;
 `;
 

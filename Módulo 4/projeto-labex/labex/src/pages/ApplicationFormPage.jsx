@@ -16,7 +16,7 @@ const ContainerPai = styled.div`
   border-radius: 10px;
   background: white;
   box-shadow: 5px 10px 18px #888888;
-  margin: 5% auto;
+  margin: 3% auto;
   padding: 20px;
 `;
 
@@ -71,9 +71,9 @@ const BotaoLimpar = styled.button`
 
 const BotaoEnviar = styled.button`
   cursor: pointer;
+  font-size: 20px;
   border: none;
   height: 60px;
-  font-size: 20px;
   height: 50px;
   width: 140px;
   padding: 5px;

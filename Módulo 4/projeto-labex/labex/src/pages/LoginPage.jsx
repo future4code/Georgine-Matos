@@ -1,5 +1,8 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { Base_URL } from "./utils/constants";
 
 const Titulo = styled.div`
   color: #006585;
@@ -16,8 +19,7 @@ const Container = styled.div`
   background: white;
   box-shadow: 5px 10px 18px #888888;
   margin: 10% auto;
-  padding-bottom: 20px;
-;
+  padding-bottom: 20px; ;
 `;
 
 const ContainerFilho = styled.div`
@@ -35,7 +37,7 @@ const Form = styled.form`
   width: 80%;
   color: #006585;
   box-shadow: 1px 1px 20px 4px #888888;
-  `;
+`;
 
 const Botoes = styled.button`
   font-size: 20px;
@@ -72,21 +74,68 @@ const Input = styled.input`
   border: 1px solid #006585;
   border-radius: 10px;
   padding: 8px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 function LoginPage() {
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const changeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const changePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const goBack = () => {
+    history.goBack();
+  };
+
+  const limpaCampos = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  const logaUser = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${Base_URL}/login`, {
+        email: email,
+        password: password,
+      })
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(() => {
+        alert("Usuário ou senha incorreto. Tente novamente!");
+      });
+    limpaCampos();
+  };
+
   return (
     <Container>
       <ContainerFilho>
         <Titulo>Login</Titulo>
         <ContainerBotoes></ContainerBotoes>
         <Form>
-          <Input placeholder="Email" type="email" />
-          <Input placeholder="Senha" type="password" />
+          <Input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={changeEmail}
+          />
+          <Input
+            placeholder="Senha"
+            type="password"
+            valeu={password}
+            onChange={changePassword}
+          />
           <ContainerBotoes>
-            <Botoes>Voltar</Botoes>
-            <Botoes>Entrar</Botoes>
+            <Botoes onClick={goBack}>Voltar</Botoes>
+            <Botoes onClick={logaUser}>Entrar</Botoes>
           </ContainerBotoes>
         </Form>
       </ContainerFilho>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Base_URL } from "./utils/constants";
 
 const Titulo = styled.div`
   color: #006585;
@@ -22,12 +24,17 @@ const ContainerPai = styled.div`
 
 const ContainerFilho = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const ContainerBotoes = styled.div`
   width: 20%;
   display: flex;
   flex-direction: column;
+`;
+
+const ContainerViagens = styled.div`
+  width: 100%;
 `;
 
 const Botoes = styled.button`
@@ -53,9 +60,16 @@ const Botoes = styled.button`
 const ContainerDadosDaViagem = styled.div`
   padding: 15px;
   border-radius: 10px;
-  width: 80%;
+  width: 94%;
   color: #006585;
   box-shadow: 1px 1px 20px 4px #888888;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+  :hover {
+    box-shadow: 1px 1px 20px 4px #272727;
+    transition: all 0.4s ease-out;
+  }
 `;
 
 const Dado = styled.h3`
@@ -65,14 +79,60 @@ const Dado = styled.h3`
 
 function ListTripsPage() {
   const history = useHistory();
+  const [listaViagens, setListaViagens] = useState([{}]);
+  const [loading, setLoading] = useState(true);
 
-  const goToApplicationFormPage = () =>{
-    history.push("/trips/application")
-  }
+  const goToApplicationFormPage = () => {
+    history.push("/trips/application");
+  };
 
   const goBack = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${Base_URL}/trips`)
+      .then((response) => {
+        setListaViagens(response.data.trips);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  // loading ? (
+  //   <p>Carregando...</p>
+  // ) : (
+  //   <>
+  //     {listaViagens.map((viagem, index) => {
+  //       return (
+  //         <ContainerDadosDaViagem key={index}>
+  //           <div>
+  //             <Dado>Nome:</Dado>
+  //             {viagem.name}
+  //           </div>
+  //           <div>
+  //             <Dado>Descrição:</Dado>
+  //             {viagem.description}
+  //           </div>
+  //           <div>
+  //             <Dado>Planeta:</Dado>
+  //             {viagem.planet}
+  //           </div>
+  //           <div>
+  //             <Dado>Duração:</Dado>
+  //             {viagem.durationInDays}
+  //           </div>
+  //           <div>
+  //             <Dado>Data:</Dado>
+  //             {viagem.date}
+  //           </div>
+  //         </ContainerDadosDaViagem>
+  //       );
+  //     })}
+  //   </>
+  // );
 
   return (
     <ContainerPai>
@@ -82,23 +142,34 @@ function ListTripsPage() {
           <Botoes onClick={goBack}>Voltar</Botoes>
           <Botoes onClick={goToApplicationFormPage}>Inscrever-se</Botoes>
         </ContainerBotoes>
-        <ContainerDadosDaViagem>
-          <div>
-            <Dado>Nome:</Dado>Havana
-          </div>
-          <div>
-            <Dado>Descrição:</Dado>Logo ali, onde Judas perdeu
-          </div>
-          <div>
-            <Dado>Planeta:</Dado>Terra
-          </div>
-          <div>
-            <Dado>Duração:</Dado>50
-          </div>
-          <div>
-            <Dado>Data:</Dado>31/07/2459
-          </div>
-        </ContainerDadosDaViagem>
+        <ContainerViagens>
+          {listaViagens.map((viagem, index) => {
+            return (
+              <ContainerDadosDaViagem key={index}>
+                <div>
+                  <Dado>Nome:</Dado>
+                  {viagem.name}
+                </div>
+                <div>
+                  <Dado>Descrição:</Dado>
+                  {viagem.description}
+                </div>
+                <div>
+                  <Dado>Planeta:</Dado>
+                  {viagem.planet}
+                </div>
+                <div>
+                  <Dado>Duração:</Dado>
+                  {viagem.durationInDays}
+                </div>
+                <div>
+                  <Dado>Data:</Dado>
+                  {viagem.date}
+                </div>
+              </ContainerDadosDaViagem>
+            );
+          })}
+        </ContainerViagens>
       </ContainerFilho>
     </ContainerPai>
   );

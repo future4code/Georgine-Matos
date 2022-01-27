@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Base_URL } from "./utils/constants";
 
 const Titulo = styled.div`
   color: #006585;
@@ -138,11 +141,30 @@ const DivCandidatoEBotoes = styled.div`
 `;
 
 function TripDetailsPage() {
+  const [trip, setTrip] = useState();
+  const params = useParams();
   const history = useHistory();
 
   const goBack = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    token
+      ? axios
+          .get(`${Base_URL}/trip/${params.id}`, {
+            headers: {
+              auth: token,
+            },
+          })
+          .then(() => {
+            console.log(params.id);
+            // setTrip(params.data)
+          })
+          .catch((error) => console.log(error))
+      : history.push("/login");
+  }, []);
 
   return (
     <ContainerPai>

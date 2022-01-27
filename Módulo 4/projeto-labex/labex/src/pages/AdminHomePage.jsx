@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Base_URL } from "./utils/constants";
+import { useParams } from "react-router-dom";
 
 const Titulo = styled.div`
   color: #006585;
@@ -92,21 +95,60 @@ const ContainerViagem = styled.form`
   align-items: center;
   padding: 15px;
   border-radius: 10px;
-  width: 80%;
   color: #006585;
   box-shadow: 1px 1px 20px 4px #888888;
+  margin-bottom: 20px;
+  transition: all 0.4s ease-out;
+  :hover {
+    box-shadow: 1px 1px 20px 4px #272727;
+    transition: all 0.4s ease-out;
+  }
+`;
+
+const ContainerViagens = styled.div`
+  width: 80%;
 `;
 
 function ViagensCadastradas() {
-  const history = useHistory()
+  const [listaViagens, setListaViagens] = useState([]);
+  // const params = useParams();
+  const history = useHistory();
+  const token = localStorage.getItem("token");
 
-  const goBack = () =>{
-    history.goBack()
-  }
+  const goBack = () => {
+    history.goBack();
+  };
 
-  const createTrip = () =>{
-    history.push("/admin/trips/create")
-  }
+  const createTrip = () => {
+    history.push("/admin/trips/create");
+  };
+
+  useEffect(() => {
+    token
+      ? axios
+          .get(`${Base_URL}/trips`, {
+            headers: {
+              auth: token,
+            },
+          })
+          .then((response) => {
+            setListaViagens(response.data.trips);
+          })
+          .catch((error) => console.log(error))
+      : history.push("/login");
+  }, [token, history]);
+
+  const deletaViagem = async (idViagem) => {
+    await axios
+      .delete(`${Base_URL}/trips/${idViagem}`, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then(() => console.log("exlusao invocada"))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <ContainerPai>
       <Titulo>Painel Administrativo</Titulo>
@@ -116,10 +158,18 @@ function ViagensCadastradas() {
           <Botoes onClick={createTrip}>Criar viagem</Botoes>
           <BotaoSair>Sair</BotaoSair>
         </ContainerBotoes>
-        <ContainerViagem>
-          nome da viagem
-          <BotaoDeletar>Excluir</BotaoDeletar>
-        </ContainerViagem>
+        <ContainerViagens>
+          {listaViagens.map((viagem, index) => {
+            return (
+              <ContainerViagem key={index}>
+                {viagem.name}
+                <BotaoDeletar onClick={() => deletaViagem(viagem.id)}>
+                  Excluir
+                </BotaoDeletar>
+              </ContainerViagem>
+            );
+          })}
+        </ContainerViagens>
       </ContainerFilho>
     </ContainerPai>
   );

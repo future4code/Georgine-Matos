@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Base_URL } from "./utils/constants";
 
 const Titulo = styled.div`
   color: #006585;
@@ -125,14 +127,33 @@ const BotoesRodape = styled.div`
 
 const Option = styled.option`
   font-size: 16px;
-`
+`;
 
-function ApplicationFormPage() {
-  const history = useHistory()
+function ApplicationFormPage(props) {
+  const [dados, setDados] = useState([{}]);
+  const history = useHistory();
 
   const goBack = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    axios
+      .get(`${Base_URL}/trips`)
+      .then((res) => {
+        setDados(res.data.trips);
+        console.log(res);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const changeTripName = (e) => {
+    setDados(e.target.value);
+  };
+
+  useEffect(()=>{
+    axios.get("https://servicodados.ibge.gov.br/api/v1/paises").then((res)=>console.log(res)).catch((error)=>console.log(error))
+  },[])
 
   return (
     <ContainerPai>
@@ -142,22 +163,30 @@ function ApplicationFormPage() {
           <Botoes onClick={goBack}>Voltar</Botoes>
         </ContainerBotoes>
         <Form>
-          <Select placeholder="Selecione o destino">
-            <Option>Selecione o destino</Option>
-            <Option>Destino</Option>
-          </Select>
-          <Input placeholder="Nome" />
-          <Input placeholder="Idade" type="number" />
-          <Input placeholder="Texto de candidatura" type="text" />
-          <Input placeholder="Profissão" type="text" />
-          <Input placeholder="Escolha uma viagem" />
-          <Select placeholder="Selecione um país">
-            <Option>Selecione o país</Option>
-          </Select>
-          <BotoesRodape>
-            <BotaoLimpar>Limpar</BotaoLimpar>
-            <BotaoEnviar>Enviar</BotaoEnviar>
-          </BotoesRodape>
+          {/* <Select placeholder="Selecione o destino" onChange={changeTripName}>
+            <Option value={""}>Selecione o destino</Option>
+            {dados.map((viagem) => {
+              return (
+                <Option value={viagem.id} key={viagem.id}>
+                  {viagem.name}
+                </Option>
+              );
+            })}
+          </Select> */}
+
+
+          {/* <Input placeholder="Nome" />
+            <Input placeholder="Idade" type="number" />
+            <Input placeholder="Texto de candidatura" type="text" />
+            <Input placeholder="Profissão" type="text" />
+            <Input placeholder="Escolha uma viagem" />
+            <Select placeholder="Selecione um país">
+              <Option>Selecione o país</Option>
+            </Select>
+            <BotoesRodape>
+              <BotaoLimpar>Limpar</BotaoLimpar>
+              <BotaoEnviar>Enviar</BotaoEnviar>
+            </BotoesRodape> */}
         </Form>
       </ContainerFilho>
     </ContainerPai>

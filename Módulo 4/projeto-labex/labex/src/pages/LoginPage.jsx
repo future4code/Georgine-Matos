@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Base_URL } from "./utils/constants";
+import { useForm } from "./../hooks/useForm";
 
 const Titulo = styled.div`
   color: #006585;
@@ -79,40 +80,27 @@ const Input = styled.input`
 
 function LoginPage() {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const changeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const changePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const { form, onChange, limpaCampos } = useForm({ email: "", password: "" });
 
   const goBack = () => {
     history.goBack();
-  };
-
-  const limpaCampos = () => {
-    setEmail("");
-    setPassword("");
   };
 
   const logaUser = (e) => {
     e.preventDefault();
     axios
       .post(`${Base_URL}/login`, {
-        email: email,
-        password: password,
+        email: form.email,
+        password: form.password,
       })
       .then(({ data }) => {
-        console.log(data);
+        localStorage.setItem("token", data.token);
+        history.push("/admin/trips/list");
       })
       .catch(() => {
         alert("Usuário ou senha incorreto. Tente novamente!");
       });
-    limpaCampos();
+      limpaCampos()
   };
 
   return (
@@ -120,22 +108,28 @@ function LoginPage() {
       <ContainerFilho>
         <Titulo>Login</Titulo>
         <ContainerBotoes></ContainerBotoes>
-        <Form>
+        <Form onSubmit={logaUser}>
           <Input
             placeholder="Email"
-            type="email"
-            value={email}
-            onChange={changeEmail}
+            type={"email"}
+            name={"email"}
+            value={form.email}
+            onChange={onChange}
+            required
           />
           <Input
             placeholder="Senha"
-            type="password"
-            valeu={password}
-            onChange={changePassword}
+            type={"password"}
+            name={"password"}
+            value={form.password}
+            onChange={onChange}
+            required
+            pattern={"[0-9]{6,6}"}
+            title="Insira uma senha de 6 dígitos(números)"
           />
           <ContainerBotoes>
             <Botoes onClick={goBack}>Voltar</Botoes>
-            <Botoes onClick={logaUser}>Entrar</Botoes>
+            <Botoes>Entrar</Botoes>
           </ContainerBotoes>
         </Form>
       </ContainerFilho>

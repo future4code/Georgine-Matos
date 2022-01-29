@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Base_URL } from "./utils/constants";
+import { pegaViagens } from "../services/RequestApi";
+import { BeatLoader } from "react-spinners";
 
 const Titulo = styled.div`
   color: #006585;
@@ -140,32 +142,35 @@ const DivCandidatoEBotoes = styled.div`
   justify-content: space-between;
 `;
 
+const Spinner = styled.div`
+  width: 94%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function TripDetailsPage() {
-  const [trip, setTrip] = useState();
   const params = useParams();
+  const [listaViagens, setListaViagens] = useState([]);
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
   const goBack = () => {
     history.goBack();
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    token
-      ? axios
-          .get(`${Base_URL}/trip/${params.id}`, {
-            headers: {
-              auth: token,
-            },
-          })
-          .then(() => {
-            console.log(params.id);
-            // setTrip(params.data)
-          })
-          .catch((error) => console.log(error))
-      : history.push("/login");
-  }, []);
+  // const mostrarViagens = async () => {
+  //   const response = await pegaViagens();
+  //   response?.trips && setListaViagens(response.trips);
+  //   setLoading(false);
+  // };
 
+  // useEffect(() => {
+  //   mostrarViagens();
+  // }, []);
+
+  console.log(params);
   return (
     <ContainerPai>
       <Titulo>Destino / Passageiros</Titulo>
@@ -174,47 +179,63 @@ function TripDetailsPage() {
           <Botoes onClick={goBack}>Voltar</Botoes>
         </ContainerBotoes>
         <DivDados>
-          <ContainerDadosDaViagem>
-            <div>
-              <Dado>Nome:</Dado>Havana
-            </div>
-            <div>
-              <Dado>Descrição:</Dado>Logo ali, onde Judas perdeu
-            </div>
-            <div>
-              <Dado>Planeta:</Dado>Terra
-            </div>
-            <div>
-              <Dado>Duração:</Dado>50
-            </div>
-            <div>
-              <Dado>Data:</Dado>31/07/2459
-            </div>
-          </ContainerDadosDaViagem>
-          <ContainerCadidatosPendentes>
-            <Fildset>
-              <legend>
-                <strong>Candidatos Pendentes</strong>
-              </legend>
-              <DivCandidatoEBotoes>
-                <p>Candidato1</p>
-                <DivBotoes>
-                  <BotaoReprovar>Reprovar</BotaoReprovar>
-                  <BotaoAprovar>Aprovar</BotaoAprovar>
-                </DivBotoes>
-              </DivCandidatoEBotoes>
-            </Fildset>
-          </ContainerCadidatosPendentes>
-          <ContainerCadidatosAprovador>
-            <Fildset>
-              <legend>
-                <strong>Candidatos Aprovados</strong>
-              </legend>
-              <p>Candidato 1</p>
-              <p>Candidato 2</p>
-              <p>Candidato 3</p>
-            </Fildset>
-          </ContainerCadidatosAprovador>
+          {loading ? (
+            <Spinner>
+              <BeatLoader color="#00a5da" />
+            </Spinner>
+          ) : (
+            listaViagens.map((viagem) => {
+              return ( viagem.id === params
+                // <ContainerDadosDaViagem key={index}>
+                //   <div>
+                //     <Dado>Nome:</Dado>
+                //     {viagem.name}
+                //   </div>
+                //   <div>
+                //     <Dado>Descrição:</Dado>
+                //     {viagem.description}
+                //   </div>
+                //   <div>
+                //     <Dado>Planeta:</Dado>
+                //     {viagem.planet}
+                //   </div>
+                //   <div>
+                //     <Dado>Duração:</Dado>
+                //     {viagem.durationInDays}
+                //   </div>
+                //   <div>
+                //     <Dado>Data:</Dado>
+                //     {viagem.date}
+                //   </div>
+                // </ContainerDadosDaViagem>
+
+                // <ContainerCadidatosPendentes>
+                //   <Fildset>
+                //     <legend>
+                //       <strong>Candidatos Pendentes</strong>
+                //     </legend>
+                //     <DivCandidatoEBotoes>
+                //       <p>Candidato1</p>
+                //       <DivBotoes>
+                //         <BotaoReprovar>Reprovar</BotaoReprovar>
+                //         <BotaoAprovar>Aprovar</BotaoAprovar>
+                //       </DivBotoes>
+                //     </DivCandidatoEBotoes>
+                //   </Fildset>
+                // </ContainerCadidatosPendentes>
+                // <ContainerCadidatosAprovador>
+                //   <Fildset>
+                //     <legend>
+                //       <strong>Candidatos Aprovados</strong>
+                //     </legend>
+                //     <p>Candidato 1</p>
+                //     <p>Candidato 2</p>
+                //     <p>Candidato 3</p>
+                //   </Fildset>
+                // </ContainerCadidatosAprovador>
+              );
+            })
+          )}
         </DivDados>
       </ContainerFilho>
     </ContainerPai>

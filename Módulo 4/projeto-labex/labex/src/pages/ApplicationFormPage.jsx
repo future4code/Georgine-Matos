@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Base_URL } from "./utils/constants";
+import { pegaPaisesAPI, pegaViagens } from "../services/RequestApi";
+import { useForm } from "../hooks/useForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../style.css";
 
 const Titulo = styled.div`
   color: #006585;
@@ -54,9 +59,8 @@ const Botoes = styled.button`
 const BotaoLimpar = styled.button`
   cursor: pointer;
   border: none;
-  height: 60px;
-  font-size: 20px;
   height: 50px;
+  font-size: 20px;
   width: 140px;
   padding: 5px;
   border-radius: 10px;
@@ -75,7 +79,6 @@ const BotaoEnviar = styled.button`
   cursor: pointer;
   font-size: 20px;
   border: none;
-  height: 60px;
   height: 50px;
   width: 140px;
   padding: 5px;
@@ -129,31 +132,65 @@ const Option = styled.option`
   font-size: 16px;
 `;
 
-function ApplicationFormPage(props) {
-  const [dados, setDados] = useState([{}]);
+function ApplicationFormPage() {
+  const [listaViagens, setListaViagens] = useState([{}]);
+  const [paises, setPaises] = useState([]);
+  const [viagemEscolhida, setViagemEscolhida] = useState("");
   const history = useHistory();
+  const { form, onChange, limpaCampos } = useForm({
+    name: "",
+    age: "",
+    applicationText: "",
+    profession: "",
+    country: "",
+  });
 
   const goBack = () => {
     history.goBack();
   };
 
   useEffect(() => {
-    axios
-      .get(`${Base_URL}/trips`)
-      .then((res) => {
-        setDados(res.data.trips);
-        console.log(res);
-      })
-      .catch((error) => console.log(error));
+    mostrarViagens();
   }, []);
 
-  const changeTripName = (e) => {
-    setDados(e.target.value);
+  const mostrarViagens = async () => {
+    const response = await pegaViagens();
+    response?.trips && setListaViagens(response.trips);
   };
 
-  useEffect(()=>{
-    axios.get("https://servicodados.ibge.gov.br/api/v1/paises").then((res)=>console.log(res)).catch((error)=>console.log(error))
-  },[])
+  useEffect(() => pegarPaises(), []);
+
+  const pegarPaises = async () => {
+    const response = await pegaPaisesAPI();
+    response && setPaises(response);
+  };
+
+  const pegaSelectNomeDoPais = (e) => {
+    setViagemEscolhida(e.target.value);
+  };
+
+  const enviarInscricao = (id) => {
+    axios
+      .post(`${Base_URL}/trips/${id}/apply`, {
+        name: form.name,
+        age: form.age,
+        applicationText: form.applicationText,
+        profession: form.profession,
+        country: form.country,
+      })
+      .then(() => {
+        limpaCampos()
+        acionaToastify()
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const acionaToastify = () => {
+    toast.success("Inscrição efetuada com sucesso", {
+      theme: "colored",
+      className: "toastifySize",
+    });
+  };
 
   return (
     <ContainerPai>
@@ -163,32 +200,83 @@ function ApplicationFormPage(props) {
           <Botoes onClick={goBack}>Voltar</Botoes>
         </ContainerBotoes>
         <Form>
-          {/* <Select placeholder="Selecione o destino" onChange={changeTripName}>
+          <Select
+            placeholder="Selecione o destino"
+            onChange={pegaSelectNomeDoPais}
+            type={"select"}
+            name={"destino"}
+            required
+          >
             <Option value={""}>Selecione o destino</Option>
-            {dados.map((viagem) => {
+            {listaViagens.map((viagem, index) => {
               return (
-                <Option value={viagem.id} key={viagem.id}>
+                <Option value={viagem.id} key={index} name={"id"}>
                   {viagem.name}
                 </Option>
               );
             })}
-          </Select> */}
-
-
-          {/* <Input placeholder="Nome" />
-            <Input placeholder="Idade" type="number" />
-            <Input placeholder="Texto de candidatura" type="text" />
-            <Input placeholder="Profissão" type="text" />
-            <Input placeholder="Escolha uma viagem" />
-            <Select placeholder="Selecione um país">
-              <Option>Selecione o país</Option>
-            </Select>
-            <BotoesRodape>
-              <BotaoLimpar>Limpar</BotaoLimpar>
-              <BotaoEnviar>Enviar</BotaoEnviar>
-            </BotoesRodape> */}
+          </Select>
+          <Input
+            placeholder="Nome"
+            type={"text"}
+            name={"name"}
+            required
+            value={form.name}
+            onChange={onChange}
+          />
+          <Input
+            placeholder="Idade"
+            type={"number"}
+            name={"age"}
+            required
+            value={form.age}
+            onChange={onChange}
+          />
+          <Input
+            placeholder="Texto de candidatura"
+            type={"text"}
+            name={"applicationText"}
+            required
+            value={form.applicationText}
+            onChange={onChange}
+          />
+          <Input
+            placeholder="Profissão"
+            type={"text"}
+            name={"profession"}
+            required
+            value={form.profession}
+            onChange={onChange}
+          />
+          <Select
+            placeholder="Selecione um país"
+            type={"select"}
+            onChange={onChange}
+            name={"country"}
+            required
+            value={form.country}
+          >
+            <Option value={""}>Selecione o país</Option>
+            {paises.map((pais, index) => {
+              return (
+                <Option value={pais.nome.abreviado} key={index}>
+                  {pais.nome.abreviado}
+                </Option>
+              );
+            })}
+          </Select>
+          <BotoesRodape>
+            <BotaoLimpar onClick={limpaCampos}>Limpar</BotaoLimpar>
+            <BotaoEnviar
+              type="button"
+              onClick={() => enviarInscricao(viagemEscolhida)}
+            >
+              Enviar
+            </BotaoEnviar>
+          </BotoesRodape>
         </Form>
       </ContainerFilho>
+      <ToastContainer autoClose={2000} />
     </ContainerPai>
   );
 }

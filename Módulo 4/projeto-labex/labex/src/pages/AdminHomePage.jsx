@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { Base_URL } from "./utils/constants";
-import { useParams } from "react-router-dom";
+import { deletaViagem, pegaViagens } from "../services/RequestApi";
+import { BeatLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../style.css";
 
 const Titulo = styled.div`
   color: #006585;
@@ -35,9 +37,10 @@ const ContainerBotoes = styled.div`
 
 const Botoes = styled.button`
   cursor: pointer;
+  font-size: 20px;
   border: none;
-  height: 60px;
-  width: 180px;
+  height: 50px;
+  width: 160px;
   padding: 5px;
   border-radius: 10px;
   background: #00a5da;
@@ -53,9 +56,10 @@ const Botoes = styled.button`
 
 const BotaoSair = styled.button`
   cursor: pointer;
+  font-size: 20px;
   border: none;
-  height: 60px;
-  width: 180px;
+  height: 50px;
+  width: 160px;
   padding: 5px;
   border-radius: 10px;
   background: #dc3545;
@@ -88,7 +92,7 @@ const BotaoDeletar = styled.button`
   }
 `;
 
-const ContainerViagem = styled.form`
+const ContainerViagem = styled.div`
   height: 20px;
   display: flex;
   justify-content: space-between;
@@ -99,6 +103,7 @@ const ContainerViagem = styled.form`
   box-shadow: 1px 1px 20px 4px #888888;
   margin-bottom: 20px;
   transition: all 0.4s ease-out;
+  cursor: pointer;
   :hover {
     box-shadow: 1px 1px 20px 4px #272727;
     transition: all 0.4s ease-out;
@@ -109,11 +114,18 @@ const ContainerViagens = styled.div`
   width: 80%;
 `;
 
+const Spinner = styled.div`
+  width: 94%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function ViagensCadastradas() {
   const [listaViagens, setListaViagens] = useState([]);
-  // const params = useParams();
   const history = useHistory();
-  const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(true);
 
   const goBack = () => {
     history.goBack();
@@ -124,31 +136,35 @@ function ViagensCadastradas() {
   };
 
   useEffect(() => {
-    token
-      ? axios
-          .get(`${Base_URL}/trips`, {
-            headers: {
-              auth: token,
-            },
-          })
-          .then((response) => {
-            setListaViagens(response.data.trips);
-          })
-          .catch((error) => console.log(error))
-      : history.push("/login");
-  }, [token, history]);
+    mostrarViagens();
+  }, []);
 
-  const deletaViagem = async (idViagem) => {
-    await axios
-      .delete(`${Base_URL}/trips/${idViagem}`, {
-        headers: {
-          auth: token,
-        },
-      })
-      .then(() => console.log("exlusao invocada"))
-      .catch((error) => console.log(error));
+  const mostrarViagens = async () => {
+    const response = await pegaViagens();
+    response?.trips && setListaViagens(response.trips);
+    setLoading(false);
   };
 
+  const removerViagem = async (idViagem) => {
+    await deletaViagem(idViagem).then(() => acionaToastify());
+    mostrarViagens();
+  };
+
+  const acionaToastify = () => {
+    toast.success("Viagem excluída com sucesso", {
+      theme: "colored",
+      className: "toastifySize",
+    });
+  };
+
+  const removeUsuario = () =>{
+    localStorage.removeItem("token")
+    history.push("/")
+  }
+
+  // const capturaViagem = (idViagem) =>{
+  //   history.push(`/admin/trips/${idViagem}`)
+  // }
   return (
     <ContainerPai>
       <Titulo>Painel Administrativo</Titulo>
@@ -156,21 +172,29 @@ function ViagensCadastradas() {
         <ContainerBotoes>
           <Botoes onClick={goBack}>Voltar</Botoes>
           <Botoes onClick={createTrip}>Criar viagem</Botoes>
-          <BotaoSair>Sair</BotaoSair>
+          <BotaoSair onClick={removeUsuario}>Sair</BotaoSair>
         </ContainerBotoes>
         <ContainerViagens>
-          {listaViagens.map((viagem, index) => {
-            return (
-              <ContainerViagem key={index}>
-                {viagem.name}
-                <BotaoDeletar onClick={() => deletaViagem(viagem.id)}>
-                  Excluir
-                </BotaoDeletar>
-              </ContainerViagem>
-            );
-          })}
+          {loading ? (
+            <Spinner>
+              <BeatLoader color="#00a5da" />
+            </Spinner>
+          ) : (
+            listaViagens?.map((viagem, index) => {
+              return (
+                // adicionar onClick ao finalizar tela "/admin/trips/:id" - ContainerViagem onClick={()=>capturaViagem(viagem.id)}
+                <ContainerViagem key={index} >
+                  {viagem.name}
+                  <BotaoDeletar onClick={() => removerViagem(viagem.id)}>
+                    Excluir
+                  </BotaoDeletar>                 
+                </ContainerViagem>
+              );
+            })
+          )}
         </ContainerViagens>
       </ContainerFilho>
+      <ToastContainer autoClose={2000} />
     </ContainerPai>
   );
 }

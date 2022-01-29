@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../style.css";
+import { pegaViagens } from "../services/RequestApi";
+import axios from "axios";
+import { Base_URL } from "./utils/constants";
 
 const Titulo = styled.div`
   color: #006585;
@@ -71,7 +78,6 @@ const BotaoLimpar = styled.button`
 const BotaoEnviar = styled.button`
   cursor: pointer;
   border: none;
-  height: 60px;
   font-size: 20px;
   height: 50px;
   width: 140px;
@@ -123,14 +129,64 @@ const BotoesRodape = styled.div`
 
 const Option = styled.option`
   font-size: 16px;
-`
+`;
 
 function CreateTripPage() {
-  const history = useHistory()
+  const token = localStorage.getItem("token");
+  const [listaViagens, setListaViagens] = useState([]);
+  const history = useHistory();
+  const { form, onChange, limpaCampos } = useForm({
+    name: "",
+    planet: "",
+    date: "",
+    description: "",
+    durationInDays: "",
+  });
 
-  const goBack = () =>{
-    history.goBack()
-  }
+  const goBack = () => {
+    history.goBack();
+  };
+
+  useEffect(() => {
+    mostrarViagens();
+  }, []);
+
+  const mostrarViagens = async () => {
+    const response = await pegaViagens();
+    response?.trips && setListaViagens(response.trips);
+  };
+
+  const acionaToastify = () => {
+    toast.success("Viagem criada com sucesso", {
+      theme: "colored",
+      className: "toastifySize",
+    });
+  };
+
+  const criarViagem = () => {
+    axios
+      .post(
+        `${Base_URL}/trips`,
+        {
+          name: form.name,
+          planet: form.planet,
+          date: form.date,
+          description: form.description,
+          durationInDays: form.durationInDays,
+        },
+        {
+          headers: {
+            auth: token,
+          },
+        }
+      )
+      .then(() => {
+        limpaCampos();
+        acionaToastify()
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <ContainerPai>
       <Titulo>Criar uma Viagem</Titulo>
@@ -139,23 +195,62 @@ function CreateTripPage() {
           <Botoes onClick={goBack}>Voltar</Botoes>
         </ContainerBotoes>
         <Form>
-          <Input placeholder="Nome" />
-          <Select placeholder="Escolha um planeta">
-            <Option>Escolha um planeta</Option>
-            <Option>Destino</Option>
+          <Input
+            placeholder="Nome"
+            type={"text"}
+            name={"name"}
+            required
+            value={form.name}
+            onChange={onChange}
+          />
+          <Select
+            placeholder="Escolha um planeta"
+            onChange={onChange}
+            type={"select"}
+            name={"planet"}
+            required
+          >
+            <Option value={""}>Escolha um planeta</Option>
+            {listaViagens.map((viagem, index) => {
+              return (
+                <Option value={viagem.planet} key={index} name={"id"}>
+                  {viagem.planet}
+                </Option>
+              );
+            })}
           </Select>
-          <Input placeholder="Texto de candidatura" type="text" />
-          <Input placeholder="Escolha uma viagem" type='date' />
-          <Select placeholder="Descrição">
-          <Input placeholder="Duração em dias" type="number" />
-            <Option>Selecione o país</Option>
-          </Select>
+          <Input
+            type={"date"}
+            required
+            value={form.date}
+            onChange={onChange}
+            name={"date"}
+          />
+          <Input
+            placeholder="Descrição"
+            type={"text"}
+            required
+            value={form.description}
+            onChange={onChange}
+            name={"description"}
+          />
+          <Input
+            placeholder="Duração em dias"
+            type="number"
+            required
+            value={form.durationInDays}
+            onChange={onChange}
+            name={"durationInDays"}
+          />
           <BotoesRodape>
-            <BotaoLimpar>Limpar</BotaoLimpar>
-            <BotaoEnviar>Criar</BotaoEnviar>
+            <BotaoLimpar onClick={limpaCampos}>Limpar</BotaoLimpar>
+            <BotaoEnviar type="button" onClick={criarViagem}>
+              Criar
+            </BotaoEnviar>
           </BotoesRodape>
         </Form>
       </ContainerFilho>
+      <ToastContainer autoClose={2000} />
     </ContainerPai>
   );
 }

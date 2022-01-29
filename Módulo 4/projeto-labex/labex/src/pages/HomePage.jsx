@@ -13,7 +13,7 @@ const Labex = styled.div`
 const Container = styled.div`
   display: flex;
   border-radius: 10px;
-  width: 500px;
+  width: 400px;
   height: 250px;
   background: white;
   box-shadow: 5px 10px 18px #888888;

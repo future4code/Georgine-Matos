@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Base_URL } from "./utils/constants";
 import { useForm } from "./../hooks/useForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../style.css";
 
 const Titulo = styled.div`
   color: #006585;
@@ -88,19 +91,33 @@ function LoginPage() {
 
   const logaUser = (e) => {
     e.preventDefault();
+    const id = toast.loading("Logando...");
     axios
       .post(`${Base_URL}/login`, {
         email: form.email,
         password: form.password,
       })
       .then(({ data }) => {
-        localStorage.setItem("token", data.token);
-        history.push("/admin/trips/list");
+          localStorage.setItem("token", data.token);
+          history.push("/admin/trips/list");
+        toast.update(id, {
+          render: "Tudo certo, vamos lá",
+          type: "success",
+          isLoading: false,
+          autoClose:2000,
+          theme:"colored"
+        });
       })
       .catch(() => {
-        alert("Usuário ou senha incorreto. Tente novamente!");
+        toast.update(id, {
+          render: "Ops, email ou senha incorreto",
+          type: "error",
+          isLoading: false,
+          autoClose:2000,
+          theme:"colored"
+        })
       });
-      limpaCampos()
+    limpaCampos();
   };
 
   return (
@@ -133,6 +150,7 @@ function LoginPage() {
           </ContainerBotoes>
         </Form>
       </ContainerFilho>
+      <ToastContainer/>
     </Container>
   );
 }

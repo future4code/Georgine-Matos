@@ -8,6 +8,7 @@ import "../style.css";
 import { pegaViagens } from "../services/RequestApi";
 import axios from "axios";
 import { Base_URL } from "./utils/constants";
+import { useProtectedPage } from "../services/ProtectPage";
 
 const Titulo = styled.div`
   color: #006585;
@@ -132,6 +133,7 @@ const Option = styled.option`
 `;
 
 function CreateTripPage() {
+  useProtectedPage()
   const token = localStorage.getItem("token");
   const [listaViagens, setListaViagens] = useState([]);
   const history = useHistory();

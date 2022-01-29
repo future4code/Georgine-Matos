@@ -60,6 +60,7 @@ const Botoes = styled.button`
 
 const ContainerDadosDaViagem = styled.div`
   padding: 15px;
+  font-size: 14px;
   border-radius: 10px;
   width: 94%;
   color: #006585;

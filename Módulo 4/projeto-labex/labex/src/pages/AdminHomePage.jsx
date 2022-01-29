@@ -6,6 +6,7 @@ import { BeatLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../style.css";
+import { useProtectedPage } from "../services/ProtectPage";
 
 const Titulo = styled.div`
   color: #006585;
@@ -40,7 +41,7 @@ const Botoes = styled.button`
   font-size: 20px;
   border: none;
   height: 50px;
-  width: 160px;
+  width: 140px;
   padding: 5px;
   border-radius: 10px;
   background: #00a5da;
@@ -59,7 +60,7 @@ const BotaoSair = styled.button`
   font-size: 20px;
   border: none;
   height: 50px;
-  width: 160px;
+  width: 140px;
   padding: 5px;
   border-radius: 10px;
   background: #dc3545;
@@ -75,17 +76,17 @@ const BotaoSair = styled.button`
 
 const BotaoDeletar = styled.button`
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   border: none;
-  height: 40px;
-  width: 90px;
+  height: 45px;
+  width: 80px;
   padding: 5px 8px;
   border-radius: 10px;
   background: #dc3545;
   color: white;
   box-shadow: 6px 7px 10px #888888;
   transition: all 0.4s ease-out;
-  margin: 20px 0;
+  right: 10px;
   :hover {
     background: #a01c28;
     transition: all 0.4s ease-out;
@@ -93,8 +94,10 @@ const BotaoDeletar = styled.button`
 `;
 
 const ContainerViagem = styled.div`
+  width: 85%;
   height: 20px;
   display: flex;
+  font-size: 14px;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
@@ -123,6 +126,7 @@ const Spinner = styled.div`
 `;
 
 function ViagensCadastradas() {
+  useProtectedPage();
   const [listaViagens, setListaViagens] = useState([]);
   const history = useHistory();
   const [loading, setLoading] = useState(true);
@@ -157,14 +161,15 @@ function ViagensCadastradas() {
     });
   };
 
-  const removeUsuario = () =>{
-    localStorage.removeItem("token")
-    history.push("/")
-  }
+  const removeUsuario = () => {
+    localStorage.removeItem("token");
+    history.push("/");
+  };
 
-  // const capturaViagem = (idViagem) =>{
-  //   history.push(`/admin/trips/${idViagem}`)
-  // }
+  const capturaIdViagem = (idViagem) => {
+    history.push(`/admin/trips/${idViagem}`);
+  };
+
   return (
     <ContainerPai>
       <Titulo>Painel Administrativo</Titulo>
@@ -182,13 +187,17 @@ function ViagensCadastradas() {
           ) : (
             listaViagens?.map((viagem, index) => {
               return (
-                // adicionar onClick ao finalizar tela "/admin/trips/:id" - ContainerViagem onClick={()=>capturaViagem(viagem.id)}
-                <ContainerViagem key={index} >
-                  {viagem.name}
+                <div key={index} className="containerViagem">
+                  <ContainerViagem
+                    key={index}
+                    onClick={() => capturaIdViagem(viagem.id)}
+                  >
+                    {viagem.name}
+                  </ContainerViagem>
                   <BotaoDeletar onClick={() => removerViagem(viagem.id)}>
                     Excluir
-                  </BotaoDeletar>                 
-                </ContainerViagem>
+                  </BotaoDeletar>
+                </div>
               );
             })
           )}

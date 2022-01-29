@@ -6,6 +6,7 @@ import axios from "axios";
 import { Base_URL } from "./utils/constants";
 import { pegaViagens } from "../services/RequestApi";
 import { BeatLoader } from "react-spinners";
+import { useProtectedPage } from './../services/ProtectPage';
 
 const Titulo = styled.div`
   color: #006585;
@@ -57,6 +58,7 @@ const Botoes = styled.button`
 
 const ContainerDadosDaViagem = styled.div`
   padding: 15px;
+  font-size: 16px;
   border-radius: 10px;
   width: 90%;
   color: #006585;
@@ -70,14 +72,14 @@ const Dado = styled.h3`
 
 const ContainerCadidatosPendentes = styled.div`
   margin-top: 20px;
-  width: 89.5%;
+  width: 95.5%;
   color: #006585;
   background-color: white;
 `;
 
 const ContainerCadidatosAprovador = styled.div`
   margin-top: 20px;
-  width: 89.5%;
+  width: 95.5%;
   color: #006585;
   background-color: white;
 `;
@@ -140,6 +142,7 @@ const DivBotoes = styled.div`
 const DivCandidatoEBotoes = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Spinner = styled.div`
@@ -151,6 +154,7 @@ const Spinner = styled.div`
 `;
 
 function TripDetailsPage() {
+  useProtectedPage()
   const params = useParams();
   const [listaViagens, setListaViagens] = useState([]);
   const history = useHistory();
@@ -160,20 +164,23 @@ function TripDetailsPage() {
     history.goBack();
   };
 
-  // const mostrarViagens = async () => {
-  //   const response = await pegaViagens();
-  //   response?.trips && setListaViagens(response.trips);
-  //   setLoading(false);
-  // };
+  const mostrarViagens = async () => {
+    const response = await pegaViagens();
+    response?.trips && setListaViagens(response.trips);
+    setLoading(false);
+  };
 
-  // useEffect(() => {
-  //   mostrarViagens();
-  // }, []);
+  useEffect(() => {
+    mostrarViagens();
+  }, []);
 
-  console.log(params);
+  // const listaCandidatos = () =>{
+  //   axios.put(`${Base_URL}/trips/${params.id}/candidates/${candID}/decide`)
+  // }
+
   return (
     <ContainerPai>
-      <Titulo>Destino / Passageiros</Titulo>
+      <Titulo>Destino / Passageiros Inscritos</Titulo>
       <ContainerFilho>
         <ContainerBotoes>
           <Botoes onClick={goBack}>Voltar</Botoes>
@@ -184,57 +191,59 @@ function TripDetailsPage() {
               <BeatLoader color="#00a5da" />
             </Spinner>
           ) : (
-            listaViagens.map((viagem) => {
-              return ( viagem.id === params
-                // <ContainerDadosDaViagem key={index}>
-                //   <div>
-                //     <Dado>Nome:</Dado>
-                //     {viagem.name}
-                //   </div>
-                //   <div>
-                //     <Dado>Descrição:</Dado>
-                //     {viagem.description}
-                //   </div>
-                //   <div>
-                //     <Dado>Planeta:</Dado>
-                //     {viagem.planet}
-                //   </div>
-                //   <div>
-                //     <Dado>Duração:</Dado>
-                //     {viagem.durationInDays}
-                //   </div>
-                //   <div>
-                //     <Dado>Data:</Dado>
-                //     {viagem.date}
-                //   </div>
-                // </ContainerDadosDaViagem>
+            <ContainerDadosDaViagem>
+              {listaViagens
+                .filter((viagem) => viagem.id === params.id)
+                .map((viagem, index) => {
+                  return (
+                    <div key={index}>
+                      <div>
+                        <Dado>Nome:</Dado>
+                        {viagem.name}
+                      </div>
+                      <div>
+                        <Dado>Descrição:</Dado>
+                        {viagem.description}
+                      </div>
+                      <div>
+                        <Dado>Planeta:</Dado>
+                        {viagem.planet}
+                      </div>
+                      <div>
+                        <Dado>Duração:</Dado>
+                        {viagem.durationInDays}
+                      </div>
+                      <div>
+                        <Dado>Data:</Dado>
+                        {viagem.date}
+                      </div>
+                    </div>
+                  );
+                })}
 
-                // <ContainerCadidatosPendentes>
-                //   <Fildset>
-                //     <legend>
-                //       <strong>Candidatos Pendentes</strong>
-                //     </legend>
-                //     <DivCandidatoEBotoes>
-                //       <p>Candidato1</p>
-                //       <DivBotoes>
-                //         <BotaoReprovar>Reprovar</BotaoReprovar>
-                //         <BotaoAprovar>Aprovar</BotaoAprovar>
-                //       </DivBotoes>
-                //     </DivCandidatoEBotoes>
-                //   </Fildset>
-                // </ContainerCadidatosPendentes>
-                // <ContainerCadidatosAprovador>
-                //   <Fildset>
-                //     <legend>
-                //       <strong>Candidatos Aprovados</strong>
-                //     </legend>
-                //     <p>Candidato 1</p>
-                //     <p>Candidato 2</p>
-                //     <p>Candidato 3</p>
-                //   </Fildset>
-                // </ContainerCadidatosAprovador>
-              );
-            })
+              <ContainerCadidatosPendentes>
+                <Fildset>
+                  <legend>
+                    <strong>Candidatos Pendentes</strong>
+                  </legend>
+                  <DivCandidatoEBotoes>
+                    <p>Ausência de CandidateId, na API, para realizar o endpoint</p>
+                    <DivBotoes>
+                      <BotaoReprovar>Reprovar</BotaoReprovar>
+                      <BotaoAprovar>Aprovar</BotaoAprovar>
+                    </DivBotoes>
+                  </DivCandidatoEBotoes>
+                </Fildset>
+              </ContainerCadidatosPendentes>
+              <ContainerCadidatosAprovador>
+                <Fildset>
+                  <legend>
+                    <strong>Candidatos Aprovados</strong>
+                  </legend>
+                  <p>Ausência de CandidateId, na API, para realizar o endpoint</p>
+                </Fildset>
+              </ContainerCadidatosAprovador>
+            </ContainerDadosDaViagem>
           )}
         </DivDados>
       </ContainerFilho>

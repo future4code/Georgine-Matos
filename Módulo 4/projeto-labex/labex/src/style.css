@@ -1,0 +1,11 @@
+.toastifySize {
+  font-size: 14px;
+}
+
+.containerViagem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+}

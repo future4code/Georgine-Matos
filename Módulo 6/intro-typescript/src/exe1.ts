@@ -8,7 +8,5 @@ function checaTriangulo(a: number, b: number, c: number): string {
   }
 }
 
-checaTriangulo(2, 5, 3);
-
-console.log("exe1 chamado");
+console.log(checaTriangulo(1, 5, 6));
 

@@ -13,6 +13,7 @@ app.use(express.json());
 //2 - 
 //FAZER UM FILTER NO ARRAY BUSCANDO PELO TYPE
 //A IDEIA É DE VERIFICAR SE O TYPE É NULO OU NAO
+//
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {

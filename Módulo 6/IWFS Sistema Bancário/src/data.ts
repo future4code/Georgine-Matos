@@ -1,19 +1,16 @@
 import { v4 as generateId } from "uuid";
 
 export type Contas = {
-  id: string;
-  name: string;
-  typeAccount: string;
+  tipo: []
 };
 
 type Transacoes = {
   transacoes: ["Transferencia, Saque, Depósito"];
 };
 
-export type Users = {
+export type User = {
   id: string;
   name: string;
-  transacoes: Transacoes;
 };
 
 export const contas = [
@@ -43,19 +40,13 @@ export const users = [
   {
     id: generateId(),
     name: "usuario1",
-    conta: contas,
-    transacoes: ["op1", "op2", "op3"],
   },
   {
     id: generateId(),
     name: "usuario2",
-    conta: contas,
-    transacoes: ["op1", "op2", "op3"],
   },
   {
     id: generateId(),
     name: "usuario3",
-    conta: contas,
-    transacoes: ["op1", "op2", "op3"],
   },
 ];

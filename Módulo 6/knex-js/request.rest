@@ -1,0 +1,46 @@
+// Para requisições com body:
+// Content-Type: application/json 
+// Pule 1 linha
+// {}
+
+// Para requisições com headers: 
+// Authorization: "token"
+
+###  // endpoint teste conexao
+GET  http://localhost:3003/
+
+###  // endpoint buscar ator
+GET http://localhost:3003/actor/rodrigo
+
+###  // endpoint buscar qtde por genero
+GET http://localhost:3003/actors/male
+
+
+// endpois atualiza salario ator
+###
+PUT http://localhost:3003/actor/1650411549165
+Content-Type: application/json 
+{
+ "salary": 500000,
+}
+
+
+//exclusão de ator
+###
+DELETE http://localhost:3003/actor/1650411549165
+
+# ###  // endpoint buscar atores
+# GET http://localhost:3003/actor
+
+
+# ###  // endpoint editar ator
+# PUT http://localhost:3003/actor/1650320838692
+# Content-Type: application/json 
+
+# {
+#  "salary": 5000000000
+# }
+
+# ###  // endpoint deletar ator
+# DELETE http://localhost:3003/actor/002
+

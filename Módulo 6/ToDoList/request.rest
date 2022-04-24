@@ -1,0 +1,53 @@
+// Para requisições com body:
+// Content-Type: application/json 
+// Pule 1 linha
+// {}
+
+// Para requisições com headers: 
+// Authorization: "token"
+
+###  // endpoint teste conexao
+GET  http://localhost:3003/
+
+###  // insere usuario na tabela
+POST  http://localhost:3003/user
+Content-Type: application/json 
+
+{
+	"name": "nometeste7",
+	"nickname": "sobrenometeste7",
+	"email": "nome7@teste.com"
+}
+
+###  // buscar usuario pelo id
+GET http://localhost:3003/user/1650660334113
+
+
+###  // editar usuario 
+PUT http://localhost:3003/user/edit/1650660334113
+Content-Type: application/json 
+
+{
+	"name": "nomeeditadoo7",
+	"nickname": ""
+}
+
+###  // insere tarefa na tabela
+POST  http://localhost:3003/task
+Content-Type: application/json 
+
+{
+	"title": "Criar banco dos alunos",
+	"description": "Devemos criar o banco dos alunos para o módulo do backend",
+	"limit_date": "2020/05/04",
+	"creator_user_id": "1650661284511"
+}
+
+###  // buscar tarefa pelo id
+GET http://localhost:3003/task/1650803583882
+
+###  // buscar todos os usuarios
+GET http://localhost:3003/userall
+
+###  // buscar todas as tarefas do usuario selecionado
+GET http://localhost:3003/tasks

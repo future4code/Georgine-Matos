@@ -102,11 +102,19 @@ app.post("/task", async (req: Request, res: Response): Promise<void> => {
 
 //BUSCAR TAREFA PELO ID
 app.get("/task/:id", async (req: Request, res: Response): Promise<void> => {
+  const taskId = req.params.id;
   try {
-    // usando o query builder
-    const result = await connection("TodoListTask").where({
-      id: req.params.id,
-    });
+    const result = await connection("TodoListTask")
+      //JUNTAR COM A TABELA PASSADA NO 1º ARGUMENTO COMPARANDO OS VALORES PASSADOS NOS 2º E 3º ARGUMENTOS DE SUAS RESPECTIVAS TABELAS
+      .innerJoin(
+        "TodoListUser",
+        "TodoListTask.creator_user_id",
+        "TodoListUser.id"
+      )
+      //SELECIONA TUDO DO 1º ARGUMENTO E NICKNAME DO 2º
+      .select("TodoListTask.*", "TodoListUser.nickname")
+      //INFORMAR DADO E SUA RESPECTIVA TABELA A SER PESQUISADO
+      .where({ "TodoListTask.id": taskId });
     console.log(result);
     res.status(200).send({ message: "Tarefa apresentada com sucesso" });
   } catch (error: any) {
@@ -127,20 +135,23 @@ app.get("/userall", async (req: Request, res: Response): Promise<void> => {
 });
 
 //BUSCAR TODAS AS TAREFAS DE 1 USUARIO
-app.get(
-  "/task?creatorUserId=id",
-  async (req: Request, res: Response): Promise<void> => {
-    try {
-      // usando o query raw
-      const result = await connection.raw(`
-      SELECT * FROM TodoListTask JOIN TodoListUser ON creator_user_id = TodoListUser.ID`);
-      console.log(result[0]);
-      res.status(200).send({ message: "Tarefas apresentadas com sucesso" });
-    } catch (error: any) {
-      res.status(500).send(error.sqlMessage || error.message);
-    }
+app.get("/tasks/user/:id", async (req: Request, res: Response): Promise<void> => {
+  const taskId = req.params.id;
+  try {
+    const result = await connection("TodoListTask")
+      .innerJoin(
+        "TodoListUser",
+        "TodoListTask.creator_user_id",
+        "TodoListUser.id"
+      )
+      .select("TodoListTask.*", "TodoListUser.nickname")
+      .where({ "TodoListTask.creator_user_id": taskId });
+    console.log(result);
+    res.status(200).send({ message: "Tarefas apresentadas com sucesso" });
+  } catch (error: any) {
+    res.status(500).send(error.sqlMessage || error.message);
   }
-);
+});
 
 const server = app.listen(3003, () => {
   if (server) {

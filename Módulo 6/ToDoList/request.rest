@@ -44,10 +44,10 @@ Content-Type: application/json
 }
 
 ###  // buscar tarefa pelo id
-GET http://localhost:3003/task/1650803583882
+GET http://localhost:3003/task/1650808007533
 
 ###  // buscar todos os usuarios
 GET http://localhost:3003/userall
 
 ###  // buscar todas as tarefas do usuario selecionado
-GET http://localhost:3003/tasks
+GET http://localhost:3003/tasks/user/1650660334113

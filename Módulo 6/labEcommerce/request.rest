@@ -1,0 +1,50 @@
+// Para requisições com body:
+// Content-Type: application/json 
+// Pule 1 linha
+// {}
+
+// Para requisições com headers: 
+// Authorization: "token"
+
+###  // endpoint teste conexao
+GET  http://localhost:3003/
+
+
+###  // inserir usuario no banco
+POST  http://localhost:3003/users
+Content-Type: application/json 
+
+{		
+    "name" : "teste",
+    "email" : "teste@email.com",
+    "password" : "$2a$12$p5LXq11CjvbSB9XYfoGUn./nRGFiYR7Y.zEuw1i7JUUCXn.5S3Qxq"
+}
+
+
+###  // endpoint todos os usuarios
+GET http://localhost:3003/users
+
+
+###  // inserir produto no banco
+POST  http://localhost:3003/products
+Content-Type: application/json 
+
+{
+    "name" : "ProdutoTeste",
+    "price" : 135465465465,
+    "image_url" : "teste"
+}
+
+###  // endpoint todos os produtos
+GET http://localhost:3003/products
+
+
+###// endpont liga produto ao usuario
+POST  http://localhost:3003/purchases
+Content-Type: application/json 
+
+{
+    "user_id" : "1651526291146",
+    "product_id" : "1651526481942",
+    "quantity" : "111"
+}

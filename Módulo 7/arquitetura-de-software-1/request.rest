@@ -1,0 +1,15 @@
+
+###  // endpoint teste conexao
+GET  http://localhost:3003/
+
+###  // endpoint criar usuario
+POST http://localhost:3003/createUser
+Content-Type: application/json 
+{
+	"name": "Michael Scott",
+	"email": "michael@dundermifflin.com",
+	"password": "theboss"	
+}
+
+###  // endpoint busca todos os usuarios
+GET  http://localhost:3003/all

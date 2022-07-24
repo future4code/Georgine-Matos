@@ -11,9 +11,9 @@ export default function GlobalContext(props) {
 
   const getAllFilm = async () => {
     const response = await getFilms();
-    console.log(response.results);
     setFilmList(response.results);
   };
+  
   return (
     <Context.Provider value={{ filmList, setFilmList }}>
       {props.children}

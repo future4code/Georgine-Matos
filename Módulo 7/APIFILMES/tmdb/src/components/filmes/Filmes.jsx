@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AllCards, Card, Spinner } from "./styled";
+import { useHistory } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { Context } from "../../context/context";
 import { BASE_IMG } from "../../constants/base_url";
+import moment from "moment";
+import { goToMovie } from "../../controller/coordinator";
 
 export default function Filmes() {
   const Base_Img = BASE_IMG;
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
-  const { filmList, setFilmList } = useContext(Context);
+  const { filmList } = useContext(Context);
   const [localFilmList, setLocalFilmList] = useState([]);
 
   useEffect(() => {
-    updateFilmList();
     setLoading(false);
-  }, [filmList]);
+    updateFilmList();
+  });
 
   const updateFilmList = async () => {
     await setLocalFilmList(filmList);
@@ -32,7 +34,11 @@ export default function Filmes() {
           <div className="row gap-4 justify-content-center">
             {localFilmList?.map((filme) => {
               return (
-                <Card key={filme.id} className="card p-0 mb-5 ">
+                <Card
+                  key={filme.id}
+                  className="card p-0 mb-5 "
+                  onClick={() => goToMovie(history, filme.id)}
+                >
                   <img
                     className="card-img-top"
                     src={`${Base_Img + filme.poster_path}`}
@@ -40,7 +46,9 @@ export default function Filmes() {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{filme.original_title}</h5>
-                    <p className="card-text">{filme.release_date}</p>
+                    <p className="card-text">
+                      {moment(filme.release_date).format("DD/MM/YYYY")}
+                    </p>
                   </div>
                 </Card>
               );

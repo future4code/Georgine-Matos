@@ -1,8 +1,9 @@
+import Router from "./routes/Router";
 
 function App() {
   return (
     <div className="App">
-    <button type="button" class="btn btn-primary">Primary</button>
+      <Router/>
     </div>
   );
 }

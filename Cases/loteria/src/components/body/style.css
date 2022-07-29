@@ -1,0 +1,23 @@
+.container{
+  width: 600px;
+  height: 400px;
+  display:flex;
+  background:pink;
+  overflow:hidden;
+  position:relative;
+ }
+
+.color1{
+  background: blue;
+  width:100%
+}
+
+.color2{
+  background:red;
+  position:absolute;
+  border-radius: 50%;
+  top:-50%;
+  right:-50%;
+  width:120%;
+  height: 200%
+}

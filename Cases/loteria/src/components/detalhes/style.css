@@ -1,0 +1,16 @@
+p {
+  margin: 0;
+}
+
+.descricao {
+  background: #2d0c5d;
+  color: white;
+}
+
+.container-img > img {
+  border-radius: 10px;
+}
+
+.grafico {
+  max-width: 10%;
+}

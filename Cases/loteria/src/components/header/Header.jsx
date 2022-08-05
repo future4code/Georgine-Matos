@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Context } from "../../context/context";
 import "./style.css";
 
 export default function Header() {
+  const { setFilterConcurso, loterias, setId, loteriasConcurso, id } = useContext(Context);
+
+  useEffect(() => {
+    filterById();
+  }, []);
+
+  const getSelect = (e) => {
+    setId(e.target.value);
+  };
+
+  const filterById = () => {
+    const resul = loteriasConcurso
+      .filter((loteria) => {
+        return loteria.loteriaId == id;
+      })
+      setFilterConcurso(resul[0]?.concursoId)
+  };
+
   return (
-   <div className="container-fluid header">
-    <div className="container d-flex justify-content-center justify-content-md-start align-items-center">
-      <h2 className="mb-0"> TMDB</h2>
-      <div className="fig"></div>
-    </div>
-   </div>
+    <select className="form-select" onChange={getSelect}>
+      <option selected value={""}>
+        Selecione o jogo
+      </option>
+      {loterias.map((loteria) => {
+        return (
+          <option key={loteria.id} value={loteria.id}>
+            {loteria.nome.toUpperCase()}
+          </option>
+        );
+      })}
+    </select>
   );
 }

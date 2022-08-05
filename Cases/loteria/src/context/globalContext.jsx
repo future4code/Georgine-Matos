@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { getFilms } from "../requests/request";
+import { getLoterias, getLoteriasConcursos } from "../requests/Request";
 import { Context } from "./context";
 
 export default function GlobalContext(props) {
-  const [filmList, setFilmList] = useState([]);
+  const [loterias, setLoterias] = useState([]);
+  const [loteriasConcurso, setLoteriasConcursos] = useState([]);
+  const [concursosId, setConcursosId] = useState([])
+  const [filterConcurso, setFilterConcurso] = useState([])
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    getAllFilm();
+    getLoteria();
   }, []);
 
-  const getAllFilm = async () => {
-    const response = await getFilms();
-    setFilmList(response.results);
+  useEffect(() => {
+    getLoteriaConcurso();
+  }, []);
+
+  const getLoteria = async () => {
+    const data = await getLoterias();
+    setLoterias(data);
   };
-  
+
+  const getLoteriaConcurso = async () => {
+    const resp = await getLoteriasConcursos();
+    setLoteriasConcursos(resp);
+  };
+
   return (
-    <Context.Provider value={{ filmList, setFilmList }}>
+    <Context.Provider value={{ filterConcurso, setFilterConcurso, concursosId, setConcursosId, loterias, setLoterias, loteriasConcurso, setLoteriasConcursos, id, setId }}>
       {props.children}
     </Context.Provider>
   );

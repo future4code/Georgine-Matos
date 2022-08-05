@@ -1,56 +1,29 @@
 import axios from "axios";
-import { api_key } from "../constants/api_key";
-import { BASE_URL } from "../constants/base_url";
+const BASE_URL = "https://brainn-api-loterias.herokuapp.com/api/v1";
 
-export const getFilms = async () => {
+export const getLoterias = async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}`);
+    const { data } = await axios.get(`${BASE_URL}/loterias`);
     return data;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export const detalhaFilme = async (id) => {
+export const getLoteriasConcursos = async () => {
   try {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}`
-    );
-    return data;
+    const { data } = await axios.get(`${BASE_URL}/loterias-concursos`);
+    return data
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export const pegaPersonagens = async (id) => {
+export const getConcursosById = async (id) => {
   try {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${api_key}`
-    );
-    return data;
+    const { data } = await axios.get(`${BASE_URL}/concursos/${id}`)
+    return data
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
-};
-
-export const pegaVideos = async (id) => {
-  try {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${api_key}`
-    );
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export const pegaRecomendacoes = async (id) => {
-  try {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${api_key}`
-    );
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+}

@@ -1,0 +1,113 @@
+* {
+  font-family: "Kantumruy Pro", sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+.row {
+  height: 33.33vh;
+  position: relative;
+  z-index: 9999;
+}
+
+.autoHeight{
+  height: auto!important;
+}
+
+.container-fluid {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: pink;
+  overflow: hidden;
+  position: relative;
+}
+
+.colorMega {
+  background: #6befa3!important;
+  width: 100%;
+}
+
+.colorQuina{
+  background: #8666ef!important;
+  width: 100%;
+}
+
+.colorLotoFacil {
+  background: #dd7ac6!important;
+  width: 100%;
+}
+
+.colorLotoMania {
+  background: #ffab64!important;
+  width: 100%;
+}
+
+.colorTimeMania {
+  background: #5aad7d!important;
+  width: 100%;
+}
+
+.colorSorte {
+  background: #bfaf83!important;
+  width: 100%;
+}
+
+.colorDefault {
+  background: #0d99ff;
+  width: 100%;
+}
+
+.balls{
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+.color2 {
+  background: #efefef;
+  position: absolute;
+  border-radius: 50%;
+  top: -75%;
+  right: -60%;
+  width: 120%;
+  height: 250%;
+}
+
+.group{
+  display: flex;
+}
+
+@media (max-width: 576px) {
+  .mobile{
+    display: block!important;
+  }
+
+  .balls{
+    justify-content: center;
+  }
+
+  .none{
+    display: none;
+  }
+
+  .row {
+    height: 20vh;
+  }
+
+  .header {
+    justify-content: center;
+  }
+
+  .model {
+    justify-content: center;
+  }
+
+  .concurso {
+    justify-content: center;
+  }
+
+  .color2 {
+    transform: rotate(90deg);
+    top: -15%;
+    right: -10%;
+  }
+}
